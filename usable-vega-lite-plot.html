@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Vega-Lite Bar Chart</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+
+    <style media="screen">
+      /* Add space between Vega-Embed links  */
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Template for Embedding Vega-Lite Visualization</h1>
+    <!-- Container for the visualization -->
+    <div id="vis"></div>
+    
+    <script>
+         // Assign the specification to a local variable vlSpec.
+        const vlSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "config": {"view": {"stroke": ""}},
+            "width": 800,
+            "height": 200,
+            "data": {
+                "values": [
+                    {"country": "Great Britain", "animal": "pigs"},
+                    {"country": "Great Britain", "animal": "pigs"},
+                    {"country": "Great Britain", "animal": "cattle"},
+                    {"country": "Great Britain", "animal": "cattle"},
+                    {"country": "Great Britain", "animal": "cattle"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "Great Britain", "animal": "sheep"},
+                    {"country": "United States", "animal": "pigs"},
+                    {"country": "United States", "animal": "pigs"},
+                    {"country": "United States", "animal": "pigs"},
+                    {"country": "United States", "animal": "pigs"},
+                    {"country": "United States", "animal": "pigs"},
+                    {"country": "United States", "animal": "pigs"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "cattle"},
+                    {"country": "United States", "animal": "sheep"},
+                    {"country": "United States", "animal": "sheep"},
+                    {"country": "United States", "animal": "sheep"},
+                    {"country": "United States", "animal": "sheep"},
+                    {"country": "United States", "animal": "sheep"},
+                    {"country": "United States", "animal": "sheep"},
+                    {"country": "United States", "animal": "sheep"}
+                ]
+            },
+            "transform": [
+                {
+                    "calculate": "{'cattle': '🐄', 'pigs': '🐖', 'sheep': '🐏'}[datum.animal]",
+                    "as": "emoji"
+                },
+                {"window": [{"op": "rank", "as": "rank"}], "groupby": ["country", "animal"]}
+            ],
+            "mark": {"type": "text", "baseline": "middle"},
+            "encoding": {
+                "x": {"field": "rank", "type": "ordinal", "axis": null},
+                "y": {"field": "animal", "type": "nominal", "axis": null, "sort": null},
+                "row": {"field": "country", "header": {"title": ""}},
+                "text": {"field": "emoji", "type": "nominal"},
+                "size": {"value": 65}
+            }
+        };
+        // Embed the visualization in the container with id `vis`
+        vegaEmbed("#vis", vlSpec, { actions: false });
+    </script>
+</body>
+</html>
